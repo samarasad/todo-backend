@@ -11,7 +11,12 @@ import { logInfo, morganStream } from "./utils/logger.js";
 
 const app = express();
 
-app.use(helmet());
+// app.use(helmet());
+app.use(
+  helmet({
+    crossOriginResourcePolicy: { policy: "cross-origin" },
+  })
+);
 app.use(
   cors({
     origin: process.env.CLIENT_ORIGIN || "*",
