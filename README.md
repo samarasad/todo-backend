@@ -2,6 +2,14 @@
 
 A REST API for managing tasks, searching them, and summarising open and completed work by week (Monday to Sunday) for the home screen of the To-Do List app.
 
+## Live demo
+
+- **API base URL:** https://todo-backend-96t1.onrender.com/api
+- **Health check:** https://todo-backend-96t1.onrender.com/health
+- **Frontend app:** https://todo-frontend-1.netlify.app
+
+The API runs on a free Render instance that sleeps when idle, so the first request can take around 30 seconds.
+
 ## Tech stack
 
 Node.js · Express · MongoDB · Redis · Winston · Joi · Luxon
@@ -52,6 +60,14 @@ Base path is `/api`. A health check is available at `GET /health`.
 **List filters:** `status, priority, from, to, page, limit`
 
 **Week endpoints:** pass `tz` with an IANA timezone such as `Asia/Kolkata` so weeks are cut at midnight in the user's timezone (default `UTC`). `/weeks/:date` also accepts `status`.
+
+### Try it
+
+```bash
+curl https://todo-backend-96t1.onrender.com/health
+
+curl "https://todo-backend-96t1.onrender.com/api/tasks/weeks?tz=Asia/Kolkata"
+```
 
 ### Sample request
 
@@ -111,6 +127,10 @@ Validation errors return status `422` with an `errors` array. Unknown ids return
 - Structured logging for easier debugging and monitoring
 - Graceful fallback if the cache is unavailable, requests simply go to the database
 - Graceful shutdown on `SIGTERM`
+
+## Deployment
+
+The API is deployed on Render with MongoDB Atlas and a cloud Redis instance. Build command is `npm install` and start command is `node src/server.js`. Set `MONGO_URI`, `REDIS_URL`, `NODE_ENV=production` and `CLIENT_ORIGIN` (the frontend URL) in the environment settings.
 
 ## Project structure
 
