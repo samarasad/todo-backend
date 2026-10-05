@@ -20,7 +20,7 @@ const pagination = {
 };
 
 export const createTaskSchema = Joi.object({
-  title: Joi.string().trim().max(10).required(),
+  title: Joi.string().trim().max(100).required(),
   description: Joi.string().trim().max(100).allow("").default(""),
   dateTime: Joi.date().iso().required(),
   priority: priority.allow(null, ""),
@@ -28,7 +28,7 @@ export const createTaskSchema = Joi.object({
 });
 
 export const updateTaskSchema = Joi.object({
-  title: Joi.string().trim().max(10),
+  title: Joi.string().trim().max(100),
   description: Joi.string().trim().max(100).allow(""),
   dateTime: Joi.date().iso(),
   priority: priority.allow(null, ""),
